@@ -4,12 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <form action="/" method="post">
-    <input type="text" name="userName">
-    <input type="submit" value="送信">
-  </form>
-  <p>名前: <%= userName %></p>
+  <% if(userName) { %>
+    名前:<%= userName %>
+    <form action="/" method="post">
+      <input type="hidden" name="removeUserName" value="">
+      <input type="submit" value="ログアウト">
+    </form>
+  <% } else { %>
+    <form action="/" method="post">
+      名前:
+      <input type="text" name="userName">
+      <input type="submit" value="ログイン">
+    </form>
+  <% } %>
+
 </body>
 </html>
