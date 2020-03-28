@@ -7,11 +7,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <% if(userName) { %>
-    名前:<%= userName %>
     <form action="/" method="post">
-      <input type="hidden" name="removeUserName" value="">
+      名前:<%= userName %>
+      <input type="hidden" name="deleteUserName" value="true">
       <input type="submit" value="ログアウト">
+    </form>
+    <form action="/" method="post">
+      <input type="hidden" name="userName" value=<%=userName %>>
+      <input type="text" name="comment">
+      <input type="submit" value="送信">
     </form>
   <% } else { %>
     <form action="/" method="post">
