@@ -1,4 +1,3 @@
-{"useName":"ユーザー１","comment":"こんばんは"}
-{"useName":"ユーザー２","comment":"こんにちは"}
-{"useName":"ユーザー１","comment":"おはよう"}
-
+{"userName":"しんすこ","comment":"ここにいるよん"}
+{"userName":"たけし","comment":"さあ"}
+{"userName":"さんま","comment":"紳助どこ？"}
