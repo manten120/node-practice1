@@ -16,6 +16,7 @@ readDataFile(dataFile);
 function readDataFile(dataFile){
   fs.readFile(dataFile, 'utf8', (err, data)=>{
     // dataFileの各行(JSON文字列)を配列commentListに格納
+    // dataFileが空のときcommentList=['']
     commentList = data.split('\n');
     console.log('commentList: ' + commentList)
   });
@@ -89,8 +90,9 @@ function response_index(req, res){
         console.log('setCookie: ' + setCookie);
       }
 
+      // 入力したコメントの処理
       if (userName && comment) {
-        let obj = {"useName": userName, "comment": comment};
+        let obj = {"userName": userName, "comment": comment};
         let JSON_string = JSON.stringify(obj);
         console.log('JSON_string:' + JSON_string);
 
@@ -105,21 +107,26 @@ function response_index(req, res){
           if(err){ throw err; }
         })
       }
-
-      write_Index(res, userName);
+      
+      // トップページを作成
+      write_Index(res, userName, commentList);
     });
 
   // POSTアクセス以外の処理
   } else {
+    // cookieからuserNameを取得する
     let userName = Cookie.parse(req.headers.cookie).userName;
     console.log('userName@GET: ' + userName);
-    write_Index(res, userName);
+    write_Index(res, userName, commentList);
   }
 }
 
 // トップページを作成
-function write_Index(res, userName) {
-  let content = ejs.render(index_ejs, {'userName': userName});
+function write_Index(res, userName, commentList) {
+  let content = ejs.render(index_ejs, {
+    'userName': userName,
+    'commentList': commentList,
+  });
   res.writeHead(200, {'Content-Type':'text/html'});
   res.write(content);
   res.end();
